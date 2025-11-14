@@ -1,5 +1,10 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { CheckCircle2, ClipboardList, Loader2, AlertCircle } from "lucide-react";
+import {
+  CheckCircle2,
+  ClipboardList,
+  Loader2,
+  AlertCircle,
+} from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -35,7 +40,11 @@ export default function Home() {
     },
   });
 
-  const { data: todos, isLoading, error: queryError } = useQuery<Todo[]>({
+  const {
+    data: todos,
+    isLoading,
+    error: queryError,
+  } = useQuery<Todo[]>({
     queryKey: ["/api/todos"],
   });
 
@@ -71,15 +80,24 @@ export default function Home() {
           <CardContent className="p-6 sm:p-8">
             {/* Header */}
             <div className="flex items-center gap-3 mb-8">
-              <CheckCircle2 className="w-8 h-8 text-primary" data-testid="icon-app" />
-              <h1 className="text-2xl font-semibold text-foreground" data-testid="text-app-title">
+              <CheckCircle2
+                className="w-8 h-8 text-primary"
+                data-testid="icon-app"
+              />
+              <h1
+                className="text-2xl font-semibold text-foreground"
+                data-testid="text-app-title"
+              >
                 Todo App
               </h1>
             </div>
 
             {/* Input Form */}
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="mb-8 space-y-2">
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="mb-8 space-y-2"
+              >
                 <FormField
                   control={form.control}
                   name="title"
@@ -107,7 +125,7 @@ export default function Home() {
                               Creating...
                             </>
                           ) : (
-                            "Create"
+                            "Create todo"
                           )}
                         </Button>
                       </div>
@@ -131,9 +149,18 @@ export default function Home() {
               ) : isLoading ? (
                 // Loading state
                 <>
-                  <Skeleton className="h-16 w-full rounded-md" data-testid="skeleton-todo-1" />
-                  <Skeleton className="h-16 w-full rounded-md" data-testid="skeleton-todo-2" />
-                  <Skeleton className="h-16 w-full rounded-md" data-testid="skeleton-todo-3" />
+                  <Skeleton
+                    className="h-16 w-full rounded-md"
+                    data-testid="skeleton-todo-1"
+                  />
+                  <Skeleton
+                    className="h-16 w-full rounded-md"
+                    data-testid="skeleton-todo-2"
+                  />
+                  <Skeleton
+                    className="h-16 w-full rounded-md"
+                    data-testid="skeleton-todo-3"
+                  />
                 </>
               ) : todos && todos.length > 0 ? (
                 // Todo items
@@ -146,11 +173,17 @@ export default function Home() {
                     <CardContent className="p-4">
                       <div className="flex items-center justify-between gap-4">
                         <div className="flex-1 min-w-0">
-                          <p className="text-base font-medium text-foreground truncate" data-testid={`text-todo-title-${todo.id}`}>
+                          <p
+                            className="text-base font-medium text-foreground truncate"
+                            data-testid={`text-todo-title-${todo.id}`}
+                          >
                             {todo.title}
                           </p>
                         </div>
-                        <span className="text-sm font-mono text-muted-foreground shrink-0" data-testid={`text-todo-id-${todo.id}`}>
+                        <span
+                          className="text-sm font-mono text-muted-foreground shrink-0"
+                          data-testid={`text-todo-id-${todo.id}`}
+                        >
                           #{todo.id.slice(0, 8)}
                         </span>
                       </div>
@@ -160,8 +193,14 @@ export default function Home() {
               ) : (
                 // Empty state
                 <div className="text-center py-12" data-testid="empty-state">
-                  <ClipboardList className="w-16 h-16 mx-auto text-muted-foreground/50 mb-4" data-testid="icon-empty-state" />
-                  <p className="text-muted-foreground text-base" data-testid="text-empty-state">
+                  <ClipboardList
+                    className="w-16 h-16 mx-auto text-muted-foreground/50 mb-4"
+                    data-testid="icon-empty-state"
+                  />
+                  <p
+                    className="text-muted-foreground text-base"
+                    data-testid="text-empty-state"
+                  >
                     No todos yet. Create your first one above!
                   </p>
                 </div>
